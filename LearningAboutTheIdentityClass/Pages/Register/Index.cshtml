@@ -1,0 +1,49 @@
+﻿@page
+@model LearningAboutTheIdentityClass.Pages.Register.IndexModel
+@{
+    ViewData["Title"] = "Register New User";
+}
+<div class="alert alert-info alert-dismissible mt-2">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    Register New User
+</div>
+<h2 class="text-info">
+    User Registration
+</h2>
+<hr />
+<form method="post" asp-page-handler="OnPost">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="row form-group">
+        <label asp-for="@Model.UserRegistration.Email" class="col-form-label col-md-2"></label>
+        <div class="col-sm-10">
+            <input asp-for="@Model.UserRegistration.Email" class="form-control" placeholder="Email..." />
+            <span asp-validation-for="@Model.UserRegistration.Email" class="text-danger"></span>
+        </div>
+
+    </div>
+    <div class="row form-group">
+        <label asp-for="@Model.UserRegistration.Password" class="col-form-label col-md-2"></label>
+        <div class="col-sm-10">
+            <input asp-for="@Model.UserRegistration.Password" class="form-control" placeholder="Password..." />
+            <span asp-validation-for="@Model.UserRegistration.Password" class="text-danger"></span>
+        </div>
+
+    </div>
+    <div class="row form-group">
+        <label asp-for="@Model.UserRegistration.ConfirmPassword" class="col-form-label col-md-2"></label>
+        <div class="col-sm-10">
+            <input asp-for="@Model.UserRegistration.ConfirmPassword" class="form-control" placeholder="Confirm Password..." />
+            <span asp-validation-for="@Model.UserRegistration.ConfirmPassword" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="row form-group">
+        <div class="col-sm-10">
+            <button class="btn btn-outline-success">Register</button>
+            <a asp-page="/Index" class="btn btn-outline-secondary">Back</a>
+        </div>
+    </div>
+    @section Scripts{
+    @*client side validation*@
+        <partial name="_ValidationScriptsPartial" />
+    }
+</form>

@@ -11,7 +11,7 @@ namespace LearningAboutTheIdentityClass.Pages
     public class IndexModel : PageModel
     {
         private readonly ILogger<IndexModel> _logger;
-
+        public string Message { get; private set; }
         public IndexModel(ILogger<IndexModel> logger)
         {
             _logger = logger;
@@ -19,7 +19,7 @@ namespace LearningAboutTheIdentityClass.Pages
 
         public void OnGet()
         {
-
+            Message = "The current time check in the city is " + DateTime.Now.ToLongTimeString();
         }
     }
 }

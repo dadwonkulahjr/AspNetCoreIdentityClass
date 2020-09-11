@@ -1,0 +1,37 @@
+﻿@page "{id:min(1)}"
+@model LearningAboutTheIdentityClass.Pages.Employees.DetailsModel
+@{
+    ViewData["Title"] = "Employee Details";
+}
+<div class="alert alert-info alert-dismissible mt-2">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    Employee Details
+</div>
+<h2 class="text-info">
+    Details
+</h2>
+<hr />
+<div class="card">
+    <h2 class="card-header text-primary text-center">
+        @Model.Employee.Name
+    </h2>
+    <div class="card-body text-center text-primary">
+        <h4>
+            Email : @Model.Employee.Email
+        </h4>
+        <h4>
+            Gender : @Model.Gender.Sex
+        </h4>
+        <h4>
+            Salary : @Model.Employee.Salary.ToString("c")
+        </h4>
+        <h4>
+            Department : @Model.Department.DepartmentName
+        </h4>
+    </div>
+    <div class="card-footer text-center text-primary">
+        <a asp-page="/Employees/Index" class="btn btn-outline-secondary">Back</a>
+        <a asp-page="/Employees/Edit" asp-route-id="@Model.Employee.Id" class="btn btn-outline-info">Edit</a>
+        <a asp-page="/Employees/Delete" asp-route-id="@Model.Employee.Id" class="btn btn-outline-danger">Delete</a>
+    </div>
+</div>
