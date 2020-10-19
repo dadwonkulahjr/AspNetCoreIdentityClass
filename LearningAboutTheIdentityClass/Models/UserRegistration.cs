@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using LearningAboutTheIdentityClass.Utilities;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -10,8 +11,8 @@ namespace LearningAboutTheIdentityClass.Models
     public class UserRegistration
     {
 
-        [EmailAddress]
-        [Required]
+        [EmailAddress, RegularExpression(@"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$")]
+        [Required, VaildEmailDomain(allowedEmail:"tuseTheProgrammer.com", ErrorMessage ="Email domain must be tuseTheProgrammer.com")]
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
         [Required]

@@ -51,6 +51,7 @@ namespace LearningAboutTheIdentityClass
                 options.AppendTrailingSlash = true;
                 options.LowercaseQueryStrings = true;
                 options.LowercaseUrls = true;
+               
             });
         }
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using LearningAboutTheIdentityClass.Models;
+using LearningAboutTheIdentityClass.SQLDataAccess;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -11,16 +12,15 @@ namespace LearningAboutTheIdentityClass.Pages.Login
 {
     public class IndexModel : PageModel
     {
-        private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
+
         [BindProperty]
         public UserLogin UserLogin { get; set; }
-        public IndexModel(UserManager<IdentityUser> userManager,
-            SignInManager<IdentityUser> signInManager)
+        public IndexModel(SignInManager<IdentityUser> signInManager)
         {
-            _userManager = userManager;
             _signInManager = signInManager;
         }
+
         public IActionResult OnGet()
         {
             return Page();
@@ -30,22 +30,19 @@ namespace LearningAboutTheIdentityClass.Pages.Login
         {
             if (ModelState.IsValid)
             {
-                //SignIn the User using the PasswordSignInAsync
-                //Method
-                var result = await _signInManager.PasswordSignInAsync(UserLogin.Email, UserLogin.Password,
-                    UserLogin.RememberMe, false);
-                //If the user is 
-                //successfully signIn
-                //Redirect the User to the Index page.
+                var result = await _signInManager.PasswordSignInAsync(UserLogin.Email,
+                       UserLogin.Password, isPersistent: UserLogin.RememberMe, lockoutOnFailure: false);
+
                 if (result.Succeeded)
                 {
                     return RedirectToPage("/Index");
                 }
-                ModelState.AddModelError(string.Empty, "Invalid Attempt");
 
+                ModelState.AddModelError(string.Empty, "Invalid email or password");
             }
 
             return Page();
         }
+
     }
 }
